@@ -14,30 +14,11 @@ public class Gui {
 	private JFrame jf;
 
 	private ActionListener musikStoppen, musikBeiUnterbrechung, musikBeiEinlaufHeim, musikBeiTorHeim, musikBeiTorGast,
-			musikBeiStrafe, musikBeiAuszeit, test;
+			musikBeiStrafe, musikBeiAuszeit;
 
 	public Gui() {
 		actionListenerErzeugen();
 		guiErzeugen();
-	}
-
-	private void einenActionListenerErzeugen(ActionListener a, String befehl) {
-
-		a = new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(3);
-
-				if (Hauptklasse.musikaktivierbar) {
-					Musik.musik(befehl);
-				} else {
-					Musik.musikbeenden();
-
-				}
-
-			}
-		};
 	}
 
 	private void actionListenerErzeugen() {
@@ -48,39 +29,63 @@ public class Gui {
 				Musik.musikbeenden();
 			}
 		};
-//		test = new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				System.out.println("test");
-//				
-//			}
-//		};
-		einenActionListenerErzeugen(test, "test");
-
 		musikBeiUnterbrechung = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(3);
-
 				if (Hauptklasse.musikaktivierbar) {
 					Musik.musik("unterbrechung");
-				} else {
-					Musik.musikbeenden();
-
 				}
 
 			}
 		};
-		
-		
-		einenActionListenerErzeugen(musikBeiUnterbrechung, "unterbrechung");
-		einenActionListenerErzeugen(musikBeiAuszeit, "auszeit");
-		einenActionListenerErzeugen(musikBeiEinlaufHeim, "einlaufheim");
-		einenActionListenerErzeugen(musikBeiStrafe, "strafe");
-		einenActionListenerErzeugen(musikBeiTorGast, "torgast");
-		einenActionListenerErzeugen(musikBeiTorHeim, "torheim");
+
+		musikBeiEinlaufHeim = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Hauptklasse.musikaktivierbar) {
+					Musik.musik("einlaufheim");
+				}
+			}
+		};
+
+		musikBeiAuszeit = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Hauptklasse.musikaktivierbar) {
+					Musik.musik("auszeit");
+				}
+			}
+		};
+		musikBeiStrafe = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Hauptklasse.musikaktivierbar) {
+					Musik.musik("strafe");
+				}
+			}
+		};
+		musikBeiTorGast = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Hauptklasse.musikaktivierbar) {
+					Musik.musik("torgast");
+				}
+			}
+		};
+		musikBeiTorHeim = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Hauptklasse.musikaktivierbar) {
+					Musik.musik("torheim");
+				}
+			}
+		};
 
 	}
 

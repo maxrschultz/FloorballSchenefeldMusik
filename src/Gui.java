@@ -1,8 +1,8 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,8 +13,8 @@ public class Gui {
 	private int screenwidth = 1000;
 	private JFrame jf;
 
-	private ActionListener musikStoppen, musikBeiUnterbrechung, musikBeiEinlaufHeim, musikBeiTorHeim, musikBeiTorGast,
-			musikBeiStrafe, musikBeiAuszeit;
+	private ActionListener musikStoppen, musikBeiUnterbrechung, musikBeiEinlaufHeim, musikBeiTorHeim, musikStartingSix,
+			musikBeiStrafe, musikBeiAuszeit,musikBeiEinlaufGast,musikHochImNorden,musikblauundweiﬂeinlebenlang;
 
 	public Gui() {
 		actionListenerErzeugen();
@@ -45,10 +45,42 @@ public class Gui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (Hauptklasse.musikaktivierbar) {
-					Musik.musik("einlaufheim");
+					Musik.musik("einlaufenheim");
 				}
 			}
 		};
+		
+		musikBeiEinlaufGast = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Hauptklasse.musikaktivierbar) {
+					Musik.musik("einlaufengegner");
+				}
+			}
+		};
+		
+		musikHochImNorden = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Hauptklasse.musikaktivierbar) {
+					Musik.musik("hochimnorden");
+				}
+			}
+		};
+		
+		musikblauundweiﬂeinlebenlang = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Hauptklasse.musikaktivierbar) {
+					Musik.musik("blauundweiﬂeinlebenlang");
+				}
+			}
+		};
+		
+		
 
 		musikBeiAuszeit = new ActionListener() {
 
@@ -68,12 +100,12 @@ public class Gui {
 				}
 			}
 		};
-		musikBeiTorGast = new ActionListener() {
+		musikStartingSix = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (Hauptklasse.musikaktivierbar) {
-					Musik.musik("torgast");
+					Musik.musik("startingsix");
 				}
 			}
 		};
@@ -92,19 +124,30 @@ public class Gui {
 	private void guiErzeugen() {
 		FensterErzeugen();
 		actionListenerErzeugen();
-		buttonErzeugen("Einlauf BW96", musikBeiEinlaufHeim);
-		buttonErzeugen("Tor BW96", musikBeiTorHeim);
-		buttonErzeugen("Tor Gast", musikBeiTorGast);
-		buttonErzeugen("Strafe", musikBeiStrafe);
-		buttonErzeugen("Auszeit 30sek", musikBeiAuszeit);
-		buttonErzeugen("Unterbrechung", musikBeiUnterbrechung);
-		buttonErzeugen("Musik Stopp", musikStoppen);
+		buttonErzeugen("Einlauf BW96", musikBeiEinlaufHeim,Color.blue);
+		buttonErzeugen("Einlauf Gast", musikBeiEinlaufGast,Color.white);
+		
+		buttonErzeugen("Starting Six", musikStartingSix,Color.blue);
+		buttonErzeugen("Auszeit 30sek", musikBeiAuszeit,Color.white);
+		
+		buttonErzeugen("Tor BW96", musikBeiTorHeim,Color.blue);		
+		buttonErzeugen("Strafe Gast", musikBeiStrafe,Color.white);
+		
+		buttonErzeugen("Hoch im Norden", musikHochImNorden,Color.blue);
+		buttonErzeugen("Blau und Weiﬂ ein Leben lang", musikblauundweiﬂeinlebenlang,Color.white);
+		
+		buttonErzeugen("Unterbrechung", musikBeiUnterbrechung,Color.green);
+		buttonErzeugen("Musik Stopp", musikStoppen,Color.red);
+		
 
 	}
 
-	public void buttonErzeugen(String text, ActionListener aL) {
-		JButton jb = new JButton(text);
-		jb.setBackground(new Color(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255)));
+	public void buttonErzeugen(String text, ActionListener aL, Color c) {
+		JButton jb = new JButton();
+		jb.setFont(new Font("Sans Serif", Font.BOLD, 30));
+		jb.setForeground(Color.black);
+		jb.setText(text);
+		jb.setBackground(c);
 		jb.setFocusable(false);
 		jb.addActionListener(aL);
 		jf.add(jb);

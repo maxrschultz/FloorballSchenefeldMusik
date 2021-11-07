@@ -30,22 +30,26 @@ public class Musik {
 
 		Hauptklasse.musikaktivierbar = false;
 		String pfad = "fehler";
-		String[] pfadezufallslieder = new String[zufallsLieder];
-		for (int i = 0; i < zufallsLieder; i++) {
-			pfadezufallslieder[i] = "./zufallslied" + i;
-		}
 
 		// welche musik starten
 		if (welcheMusik == "unterbrechung") {
-			pfad = pfadezufallslieder[new Random().nextInt(zufallsLieder)];
+			pfad = "./Unterbrechungsmusik/zufallslied" + new Random().nextInt(zufallsLieder) + ".wav";
 		} else if (welcheMusik == "torheim") {
-			pfad = "./torheim.wav";
-		} else if (welcheMusik == "torgast") {
-			pfad = "./torgast.wav";
+			pfad = "./Spezial/torheim.wav";
+		} else if (welcheMusik == "startingsix") {
+			pfad = "./Spezial/startingsix.wav";
 		} else if (welcheMusik == "strafe") {
-			pfad = "./strafe.wav";
-		} else if (welcheMusik == "einlaufheim") {
-			pfad = "./Larspacex.wav";
+			pfad = "./Spezial/strafegast.wav";
+		} else if (welcheMusik == "einlaufenheim") {
+			pfad = "./Spezial/einlaufenheim.wav";
+		} else if (welcheMusik == "auszeit") {
+			pfad = "./Spezial/auszeit.wav";
+		} else if (welcheMusik == "blauundweißeinlebenlang") {
+			pfad = "./Spezial/blauundweißeinlebenlang.wav";
+		} else if (welcheMusik == "hochimnorden") {
+			pfad = "./Spezial/hochimnorden.wav";
+		} else if (welcheMusik == "einlaufengegner") {
+			pfad = "./Spezial/einlaufengegner.wav";
 		}
 		if (pathExists(pfad)) {
 			musikStarten(pfad);
@@ -68,6 +72,7 @@ public class Musik {
 
 						try {
 							bis = new BufferedInputStream(getClass().getClassLoader().getResourceAsStream(pfad));
+
 						} catch (Exception e) {
 							System.out.println("fehler");
 							musikbeenden();
@@ -77,7 +82,7 @@ public class Musik {
 
 						FloatControl gaincontrol = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 						gaincontrol.setValue(-20.0f);
-						clip.loop(Clip.LOOP_CONTINUOUSLY);
+						clip.loop(1);
 						Thread.sleep(clip.getMicrosecondLength() / 1000);
 
 					} catch (Exception e) {

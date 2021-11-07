@@ -10,8 +10,7 @@ import javax.sound.sampled.FloatControl;
 
 public class Musik {
 	static Clip clip;
-	static int zufallsLieder = 12;
-//		static AudioInputStream input;
+	static int zufallsLieder = 46;
 
 	public static boolean pathExists(String pfad) {
 		boolean existiert;
@@ -82,8 +81,7 @@ public class Musik {
 
 						FloatControl gaincontrol = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 						gaincontrol.setValue(-20.0f);
-						clip.loop(1);
-						Thread.sleep(clip.getMicrosecondLength() / 1000);
+						clip.loop(Clip.LOOP_CONTINUOUSLY);
 
 					} catch (Exception e) {
 						e.printStackTrace();

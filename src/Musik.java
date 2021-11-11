@@ -10,7 +10,8 @@ import javax.sound.sampled.FloatControl;
 
 public class Musik {
 	static Clip clip;
-	static int zufallsLieder = 46;
+	static File dir = new File("./Unterbrechungsmusik");
+	static String[] paths = dir.list();
 
 	public static boolean pathExists(String pfad) {
 		boolean existiert;
@@ -27,12 +28,14 @@ public class Musik {
 
 	public static synchronized void musik(String welcheMusik) {
 
+		System.out.println("musik1");
+
 		Hauptklasse.musikaktivierbar = false;
 		String pfad = "fehler";
 
 		// welche musik starten
 		if (welcheMusik == "unterbrechung") {
-			pfad = "./Unterbrechungsmusik/zufallslied" + new Random().nextInt(zufallsLieder) + ".wav";
+			pfad = "./Unterbrechungsmusik/" + paths[new Random().nextInt(paths.length)];
 		} else if (welcheMusik == "torheim") {
 			pfad = "./Spezial/torheim.wav";
 		} else if (welcheMusik == "startingsix") {
@@ -54,7 +57,10 @@ public class Musik {
 			musikStarten(pfad);
 		} else {
 			Hauptklasse.musikaktivierbar = true;
+			System.out.println("pfad existiert nicht");
 		}
+
+		System.out.println("musik2");
 
 	}
 
